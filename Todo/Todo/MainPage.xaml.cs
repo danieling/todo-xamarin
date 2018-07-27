@@ -13,5 +13,16 @@ namespace Todo
 		{
 			InitializeComponent();
 		}
-	}
+
+        async void Button_Clicked(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(usuarioEntry.Text) || string.IsNullOrWhiteSpace(passwordEntry.Text))
+                resultadoLabel.Text = "Debe escribir usuario y contraseña";
+            else
+            {
+                resultadoLabel.Text = "Inicio de sesion exitoso";
+                await Navigation.PushAsync(new NewTodo());
+            }
+        }
+    }
 }
