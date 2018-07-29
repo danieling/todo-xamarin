@@ -6,6 +6,7 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.OS;
+using System.IO;
 
 namespace Todo.Droid
 {
@@ -20,7 +21,11 @@ namespace Todo.Droid
             base.OnCreate(bundle);
 
             global::Xamarin.Forms.Forms.Init(this, bundle);
-            LoadApplication(new App());
+
+            string filename = "tasks.sqlite";
+            string path = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
+            string dbpath = Path.Combine(path, filename);
+            LoadApplication(new App(dbpath));
         }
     }
 }

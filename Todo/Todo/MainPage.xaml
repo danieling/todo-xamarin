@@ -5,9 +5,9 @@
              x:Class="Todo.MainPage">
 
     <StackLayout VerticalOptions="Center" Margin="20">
-        <Entry x:Name="usuarioEntry" Placeholder="Nombre de Usuario" />
-        <Entry x:Name="passwordEntry" Placeholder="Contraseña" IsPassword="True"/>
-        <Button Text="Ingresar" Clicked="Button_Clicked"/>
+        <Entry x:Name="usuarioEntry"/>
+        <Entry x:Name="passwordEntry" IsPassword="True"/>
+        <Button x:Name="btn_signin" Clicked="Button_Clicked"/>
         <Label x:Name="resultadoLabel" HorizontalOptions="Center" TextColor="Red"/>
     </StackLayout>
 

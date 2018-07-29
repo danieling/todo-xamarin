@@ -7,12 +7,20 @@ namespace Todo
 {
 	public partial class App : Application
 	{
+        public static string DBPath;
 		public App ()
 		{
 			InitializeComponent();
 
 			MainPage = new NavigationPage(new MainPage());
 		}
+
+        public App(string dbpath)
+        {
+            InitializeComponent();
+            DBPath = dbpath;
+            MainPage = new NavigationPage(new MainPage());
+        }
 
 		protected override void OnStart ()
 		{
