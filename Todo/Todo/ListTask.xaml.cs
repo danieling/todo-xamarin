@@ -15,7 +15,19 @@ namespace Todo
 		public ListTask ()
 		{
 			InitializeComponent ();
+
+            var btn_newTask = new ToolbarItem()
+            {
+                Text = "+"
+            };
+            btn_newTask.Clicked += AddTask;
+            ToolbarItems.Add(btn_newTask);
 		}
+
+        async void AddTask(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new NewTodo());
+        }
 
         protected override void OnAppearing()
         {
@@ -23,7 +35,19 @@ namespace Todo
             using(SQLite.SQLiteConnection conexion = new SQLite.SQLiteConnection(App.DBPath))
             {
                 List<NewTask> tasks;
-                tasks = conexion.Table<NewTask>().ToList();
+                tasks = conexion.Table<NewTask>().Where(t => t.TaskComplete == false).ToList();
+                listTasksView.ItemsSource = tasks;
+            }
+        }
+        
+        void taskComplete(object sender, System.EventArgs e)
+        {
+            using(SQLite.SQLiteConnection conexion = new SQLite.SQLiteConnection(App.DBPath))
+            {
+                var taskAcomplish = (sender as MenuItem).CommandParameter as NewTask;
+                taskAcomplish.TaskComplete = true;
+                conexion.Update(taskAcomplish);
+                List<NewTask> tasks = conexion.Table<NewTask>().Where(t => t.TaskComplete == false).ToList();
                 listTasksView.ItemsSource = tasks;
             }
         }
